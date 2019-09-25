@@ -1,0 +1,26 @@
+//Promise.all实现
+
+function all(ite){
+    return new Promise((resolve, reject)=>{
+        let arr = []
+        let handler = () => {
+            if(arr.length >= ite.length){
+                resolve(arr)
+            }
+        }
+        for(let i in ite){
+            ite[i].then(re => {arr[i] = re; handler()}).catch(er => reject(er))
+        }
+    })
+}
+
+
+//Promise.race实现
+
+function all(ite){
+    return new Promise((resolve, reject)=>{
+        for(let i in ite){
+            ite[i].then(re => resolve(re)).catch(er => reject(er))
+        }
+    })
+}
